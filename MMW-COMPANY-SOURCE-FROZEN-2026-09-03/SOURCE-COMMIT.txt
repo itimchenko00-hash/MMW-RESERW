@@ -1,0 +1,4 @@
+Exact source snapshot from itimchenko00-hash/MMW_COMPANY main.
+Source commit: 1eccd37cd9f22c6f5e7b6b30d0583ade90c83df7
+
+The source snapshot is kept separate from the Render backup. Do not merge or overwrite files between these folders.
