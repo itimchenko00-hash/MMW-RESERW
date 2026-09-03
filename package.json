@@ -1,0 +1,1 @@
+{"name":"mmw-company","version":"1.0.0","private":true,"scripts":{"start":"node -r ./src/final-cleanup-hook.js -r ./src/products-cart-hook.js -r ./src/order-catalog-hook.js -r ./src/company-ui-hook.js -r ./src/labels-cleanup-hook.js src/server.js"},"dependencies":{"express":"^5.1.0"},"engines":{"node":">=20"}}
