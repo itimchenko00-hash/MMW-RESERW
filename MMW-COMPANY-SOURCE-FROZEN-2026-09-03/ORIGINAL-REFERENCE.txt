@@ -1,0 +1,5 @@
+Original MMW-COMPANY source reference:
+itimchenko00-hash/MMW_COMPANY
+main commit: 1eccd37cd9f22c6f5e7b6b30d0583ade90c83df7
+
+This is a frozen reference snapshot. Do not mix it with the Render backup snapshot.
