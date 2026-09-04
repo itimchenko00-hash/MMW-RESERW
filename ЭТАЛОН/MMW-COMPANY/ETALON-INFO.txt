@@ -1,0 +1,7 @@
+MMW-COMPANY — ЭТАЛОН
+Дата фиксации: 2026-09-04
+Exact source blob SHA: 4c2a1ef799cb63098a85bcb2d9aae40ac2a15ede
+
+Эта папка содержит точную резервную копию утверждённой версии MMW-COMPANY Business Development Studio.
+Не редактировать. Использовать как восстановительный источник.
+Правило: COPY, NEVER MOVE.
