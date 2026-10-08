@@ -1,0 +1,35 @@
+name: retake-etalon-7
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  retake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Copy exact original Etalon 7.0
+        run: |
+          git clone https://github.com/itimchenko00-hash/MMW-ORDER-FACTORY.git /tmp/factory
+          git -C /tmp/factory checkout cfe186bc9fdfb4584e11c51800ba06c7249cd163
+          rm -rf ETALON-7.0-RETAKE
+          mkdir -p ETALON-7.0-RETAKE/MMW-COMPANY-2-WORKING
+          cp -a "/tmp/factory/MMW-COMPANY/2 — WORKING/." "ETALON-7.0-RETAKE/MMW-COMPANY-2-WORKING/"
+      - name: Verify source and reserve
+        run: |
+          test -f "ETALON-7.0-RETAKE/MMW-COMPANY-2-WORKING/server.js"
+          test -f "ETALON-7.0-RETAKE/MMW-COMPANY-2-WORKING/public/index.html"
+          test -d "ETALON-7.0-RETAKE/MMW-COMPANY-2-WORKING/public/ASSETS"
+      - name: Commit reserve copy
+        run: |
+          git config user.name "MMW Reserve Bot"
+          git config user.email "itimchenko00@gmail.com"
+          git add -A
+          git commit -m "Retake exact Etalon 7.0 from original cfe186bc" 
+          git push origin HEAD:main
+          rm -f .github/workflows/retake-etalon-7.yml
+          git add -A
+          git commit -m "Remove one-time retake workflow"
+          git push origin HEAD:main
