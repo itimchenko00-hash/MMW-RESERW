@@ -1,0 +1,13 @@
+{
+  "name": "mmw-company-order7",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "pdfkit": "^0.17.2",
+    "pg": "^8.16.3",
+    "dejavu-fonts-ttf": "^2.37.1"
+  }
+}
