@@ -1,6 +1,7 @@
 name: retake-etalon-7
 on:
-  workflow_dispatch:
+  push:
+    branches: [main]
 permissions:
   contents: write
 jobs:
@@ -17,7 +18,7 @@ jobs:
           rm -rf ETALON-7.0-RETAKE
           mkdir -p ETALON-7.0-RETAKE/MMW-COMPANY-2-WORKING
           cp -a "/tmp/factory/MMW-COMPANY/2 — WORKING/." "ETALON-7.0-RETAKE/MMW-COMPANY-2-WORKING/"
-      - name: Verify source and reserve
+      - name: Verify exact source
         run: |
           test -f "ETALON-7.0-RETAKE/MMW-COMPANY-2-WORKING/server.js"
           test -f "ETALON-7.0-RETAKE/MMW-COMPANY-2-WORKING/public/index.html"
@@ -27,7 +28,7 @@ jobs:
           git config user.name "MMW Reserve Bot"
           git config user.email "itimchenko00@gmail.com"
           git add -A
-          git commit -m "Retake exact Etalon 7.0 from original cfe186bc" 
+          git commit -m "Retake exact Etalon 7.0 from original cfe186bc"
           git push origin HEAD:main
           rm -f .github/workflows/retake-etalon-7.yml
           git add -A
