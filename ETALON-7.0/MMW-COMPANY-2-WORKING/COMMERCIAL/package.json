@@ -1,0 +1,9 @@
+{
+  "name": "mmw-company-commercial",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Commercial contour for MMW-COMPANY",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
