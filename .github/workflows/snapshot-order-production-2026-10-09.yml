@@ -1,0 +1,54 @@
+name: Create one-time MMW-ORDER production source reserve
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/snapshot-order-production-2026-10-09.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  reserve:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout reserve repository
+        uses: actions/checkout@v4
+        with:
+          path: reserve
+
+      - name: Checkout exact production source checkpoint
+        uses: actions/checkout@v4
+        with:
+          repository: itimchenko00-hash/MMW-ORDER
+          ref: c4a2941852c501fcf627e381c34fb4f7eecfae46
+          path: order-source
+
+      - name: Create source-only archive and manifest
+        run: |
+          cd order-source
+          zip -qr ../reserve/MMW-ORDER-PRODUCTION-RESERVE-2026-10-09.zip . \
+            -x ".git/*" "node_modules/*" ".data/*" ".env" ".env.*"
+          cd ../reserve
+          cat > MMW-ORDER-PRODUCTION-RESERVE-2026-10-09.md <<'EOF'
+          # MMW-ORDER production source reserve
+
+          - Snapshot date: 2026-10-09
+          - Source repository: https://github.com/itimchenko00-hash/MMW-ORDER
+          - Source branch: main
+          - Exact source commit: c4a2941852c501fcf627e381c34fb4f7eecfae46
+          - Matching reserve branch: RESERVE-PRODUCTION-2026-10-09
+          - Contents: source-code snapshot only.
+          - Excluded: Git metadata, node_modules, local order data, .env files and secrets.
+          - Production PostgreSQL data is not included in this archive and must be backed up separately.
+          EOF
+
+      - name: Commit reserve archive
+        working-directory: reserve
+        run: |
+          git config user.name "MMW Reserve Bot"
+          git config user.email "itimchenko00-hash@users.noreply.github.com"
+          git add MMW-ORDER-PRODUCTION-RESERVE-2026-10-09.zip MMW-ORDER-PRODUCTION-RESERVE-2026-10-09.md
+          git commit -m "Reserve MMW-ORDER production source at c4a2941"
+          git push origin HEAD:main
